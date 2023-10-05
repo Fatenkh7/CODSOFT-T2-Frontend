@@ -1,0 +1,72 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.nav {
+    display: flex;
+    /* Remove list-style and margin for direct links */
+}
+
+.nav .nav-links {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.nav .nav-links>a {
+    /* Add margin between links as needed */
+    margin-right: 80px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu-button {
+    display: none;
+    /* Hide the menu button by default */
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        /* Hide the navigation menu by default on mobile */
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #333;
+        width: 100%;
+    }
+
+    .nav-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .nav-open {
+        display: flex;
+        flex-direction: column;
+        /* Show the navigation menu when menuOpen is true */
+    }
+
+    .menu-button {
+        display: block;
+        /* Show the menu button on mobile */
+    }
+}
