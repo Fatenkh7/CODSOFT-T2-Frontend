@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../../components/loading/index';
 import './index.css';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
 function SignIN() {
+    const signIn = useSignIn()
     const [isLoading, setIsLoading] = useState(false);
     const [login, setLogin] = useState({
         email: '',
@@ -19,6 +21,7 @@ function SignIN() {
             [name]: value,
         });
     };
+
     const handleSignIn = (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -28,6 +31,22 @@ function SignIN() {
                 password: login.password,
             })
             .then((response) => {
+                if (res.status === 200) {
+                    if (signIn(
+                        {
+                            token: res.data.token,
+                            expiresIn: res.data.expiresIn,
+                            tokenType: "Bearer",
+                            authState: res.data.authUserState,
+                            refreshToken: res.data.refreshToken,                    // Only if you are using refreshToken feature
+                            refreshTokenExpireIn: res.data.refreshTokenExpireIn     // Only if you are using refreshToken feature
+                        }
+                    )) { // Only if you are using refreshToken feature
+                        // Redirect or do-something
+                    } else {
+                        //Throw error
+                    }
+                }
                 console.log("resss", response)
 
                 const user_token = response.headers.authorization.split(' ')[1];
