@@ -8,7 +8,7 @@ function About() {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 20000); // Simulate 2 seconds of loading
+        },); // Simulate 2 seconds of loading
     }, []);
 
     return (

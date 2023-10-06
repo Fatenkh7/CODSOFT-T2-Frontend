@@ -8,7 +8,7 @@ function Contact() {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 20000); // Simulate 2 seconds of loading
+        }, 2000); // Simulate 2 seconds of loading
     }, []);
 
     return (
@@ -19,7 +19,7 @@ function Contact() {
             ) : (
                 // Display your actual content when loading is done
                 <div>
-                    <h1>hello</h1>
+                    <h1>hello contactt</h1>
                 </div>
             )}
         </div>);
