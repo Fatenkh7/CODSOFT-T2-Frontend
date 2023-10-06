@@ -1,47 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/header/index';
 import About from './pages/About/index';
 import Contact from './pages/contact/index';
 import Footer from './components/footer/index';
 import SignIN from './pages/signin/index';
-import Home from './pages/Home/index';
+import Home from './pages/home/index';
+import SignUp from './pages/signup/index'; // Import the SignUp component
+import NoPage from './pages/nopage/index';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Function to set login status (replace this with your actual logic)
-  const handleLogin = () => {
-    // Set login status to true (successful login)
-    setIsLoggedIn(true);
-  };
-
-  useEffect(() => {
-    // Check if the user is already logged in (e.g., by checking for a token in localStorage)
+  const checkUserToken = () => {
     const userToken = localStorage.getItem('user-auth');
-    if (userToken) {
-      setIsLoggedIn(true);
+    if (!userToken || userToken === 'undefined') {
+      setIsLoggedIn(false);
     }
-  }, []);
+    setIsLoggedIn(true);
+  }
+  useEffect(() => {
+    checkUserToken();
+  }, [isLoggedIn]);
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Header>
-                <Route path="/home" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
-                <Route path="/about" element={isLoggedIn ? <About /> : <Navigate to="/login" />} />
-                <Route path="/contact" element={isLoggedIn ? <Contact /> : <Navigate to="/login" />} />
-              </Header>
-            }
-          />
-          <Route path="/login" element={<SignIN onLogin={handleLogin} />} />
+          <Route path="/" element={<SignIN />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
-        <Footer />
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

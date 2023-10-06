@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../../components/loading/index';
 import './index.css';
@@ -10,7 +10,7 @@ function SignIN() {
         email: '',
         password: '',
     });
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -75,6 +75,7 @@ function SignIN() {
                         </div>
                         <div className='section2'>
                             <button id="button" type="submit" >Submit</button>
+                            <Link to="/signup">Sign up</Link>
                         </div>
                     </form>
                 </div>
